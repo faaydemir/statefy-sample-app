@@ -1,19 +1,14 @@
-import sleep from "sleep-promise"
-import { bookmarksCleared } from "../../state/blogs"
+import { bookmarksCleared } from "../../state/blog"
 import { loginSucceed, logoutSucceed } from "../../state/user"
+import * as api from "../../api"
 
 export const login = async () => {
-    //login request
-    await sleep(100);
-    loginSucceed({
-        id: "1",
-        name: "test user",
-        email: "test@statefy.com"
-    })
+    const user = await api.login();
+    loginSucceed(user)
 }
 
 export const logout = async () => {
-    await sleep(100);
+    await api.logout();
     logoutSucceed();
     bookmarksCleared();
 }

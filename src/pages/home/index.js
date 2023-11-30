@@ -1,7 +1,9 @@
 import { useRenderCount } from '@uidotdev/usehooks';
 import React from 'react'
-import Blogs from './components/blogs'
+import Posts from './components/posts'
 import Bookmarks from './components/bookmarks'
+import PopularPosts from './components/popular-posts';
+import Favorites from './components/favorites';
 
 export default function Home() {
 
@@ -11,12 +13,14 @@ export default function Home() {
         <>
             <h1>Home</h1>
             <small>render count :{renderCount}</small>
-            {/* split page vertically into 2  */}
-
-            <div style={{ display: 'flex', 'grid-template-columns': '1fr 1fr' }}>
-                <Blogs />
+            <div style={{ display: 'flex' }}>
+                <Posts />
                 <div style={{ width: '1px', margin: 20, background: 'gray' }}></div>
                 <Bookmarks />
+                <div style={{ width: '1px', margin: 20, background: 'gray' }}></div>
+                <Favorites />
+                <div style={{ width: '1px', margin: 20, background: 'gray' }}></div>
+                <PopularPosts />
             </div>
         </>
     )

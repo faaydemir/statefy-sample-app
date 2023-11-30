@@ -5,7 +5,7 @@ import Home from './pages/home';
 
 function App() {
   return (
-    <div>
+    <div style={{padding:40}}>
       <Navigation />
       <Routes >
         <Route exact path="/" element={<Home />} ></Route>

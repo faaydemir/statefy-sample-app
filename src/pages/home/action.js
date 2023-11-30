@@ -1,40 +1,30 @@
-import sleep from "sleep-promise"
-import { blogsLoaded, bookmarksLoaded } from "../../state/blogs";
+import { postsLoaded, bookmarksLoaded, favoritesLoaded, favoritesLoading } from "../../state/blog";
+import * as api from "../../api";
+import userState from "../../state/user";
 
-export const loadBlogs = async () => {
-    await sleep(300);
-    blogsLoaded([
-        {
-            id: "1",
-            title: "blog 1",
-            body: "text text text text text texttext text text text text text text text text text text text"
-        },
-        {
-            id: "2",
-            title: "blog 2",
-            body: "text text text text text texttext text text text text text text text text text text text"
-        },
-        {
-            id: "3",
-            title: "blog 3",
-            body: "text text text text text texttext text text text text text text text text text text text"
-        },
-        {
-            id: "4",
-            title: "blog 4",
-            body: "text text text text text texttext text text text text text text text text text text text"
-        }
-    ])
+export const loadPosts = async () => {
+    const posts = await api.fetchPosts();
+    postsLoaded(posts)
 }
 
-export const loadBookmarks = async (userId) => {
-    await sleep(150);
-    bookmarksLoaded([
-        {
-            title: "blog 1",
-        },
-        {
-            title: "blog 3",
-        },
-    ])
+export const loadBookmarks = async () => {
+    const bookmarks = await api.fetchBookmarks();
+    bookmarksLoaded(bookmarks);
+}
+
+export const bookmarkPost = async (postId) => {
+
+    //this should not used this way.
+    if (!userState.get().isAuthenticated)
+        alert('login to bookmark post');
+
+    await api.bookmarkPost(postId);
+    loadBookmarks();
+}
+
+
+export const loadFavorites = async () => {
+    favoritesLoading();
+    const favorites = await api.fetchFavorites();
+    favoritesLoaded(favorites);
 }
