@@ -15,8 +15,10 @@ export const loadBookmarks = async () => {
 export const bookmarkPost = async (postId) => {
 
     //this should not used this way.
-    if (!userState.get().isAuthenticated)
+    if (!userState.get().isAuthenticated) {
         alert('login to bookmark post');
+        return;
+    }
 
     await api.bookmarkPost(postId);
     loadBookmarks();
